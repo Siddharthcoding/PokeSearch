@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { usePokemonContext } from "../contexts/PokemonContext";
 import PokemonCard from "../components/PokemonCard";
 import PokemonCardSkeleton from "../components/PokemonCardSkeleton";
@@ -23,6 +23,10 @@ const Home = () => {
     changePerPage,
   } = usePokemonContext();
 
+  const [showCards, setShowCards] = useState(false);
+  
+  const skeletonCards = Array(8).fill(0);
+
   const filteredCount = allPokemon.filter(pokemon => {
     const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTypes =
@@ -31,8 +35,16 @@ const Home = () => {
     return matchesSearch && matchesTypes;
   }).length;
 
-  // Generate skeleton cards array
-  const skeletonCards = Array(8).fill(0); // Show 8 skeleton cards while loading
+  useEffect(() => {
+    if (!loading && pokemonList.length > 0) {
+      const timer = setTimeout(() => {
+        setShowCards(true);
+      }, 1000); 
+      return () => clearTimeout(timer);
+    } else {
+      setShowCards(false);
+    }
+  }, [loading, pokemonList]);
 
   return (
     <main className="container mx-auto px-4 py-8 min-h-[80vh]">
@@ -48,7 +60,7 @@ const Home = () => {
         />
       </section>
       
-      {loading && (
+      {(loading || !showCards) && (
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {skeletonCards.map((_, index) => (
             <PokemonCardSkeleton key={index} />
@@ -64,7 +76,7 @@ const Home = () => {
         <div className="text-center text-gray-600">No Pokémon found matching your criteria.</div>
       )}
       
-      {!loading && !error && pokemonList.length > 0 && (
+      {showCards && !error && pokemonList.length > 0 && (
         <>
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {pokemonList.map(pokemon => (

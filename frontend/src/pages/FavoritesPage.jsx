@@ -13,7 +13,7 @@ const FavoritesPage = () => {
           Your Favorite Pokémon
         </h1>
         <Link
-          to="/"
+          to="/home"
           className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-pink-400 text-white font-semibold shadow hover:scale-105 transition"
         >
           ← Back to Home

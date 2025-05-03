@@ -101,7 +101,7 @@ const DetailPage = () => {
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-yellow-50 to-blue-50 flex items-center justify-center py-10 px-2">
       <div className={`w-full max-w-md rounded-3xl shadow-2xl p-8 bg-gradient-to-br ${gradient} flex flex-col items-center`}>
         <Link
-          to="/"
+          to="/home"
           className="inline-block mb-4 px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-pink-400 text-white font-semibold shadow hover:scale-105 transition"
         >
           ← Back to Home

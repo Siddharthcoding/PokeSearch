@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { to: "/", label: "Home" },
+  { to: "/home", label: "Home" },
   { to: "/favorites", label: "Favorites" },
   { to: "/compare", label: "Compare" },
   { to: "/random", label: "Random" }
